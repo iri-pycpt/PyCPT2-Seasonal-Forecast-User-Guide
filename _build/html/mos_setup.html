@@ -1,0 +1,612 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Configuring PyCPT for SubX &#8212; Guide to PyCPT 2 for Seasonal Climate Forecasts</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/pycpt_logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Guide to PyCPT 2 for Seasonal Climate Forecasts</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="nextgen.html">
+   The NextGen Approach
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cpt.html">
+   The Climate Predictability Tool (CPT)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="workflow1.html">
+   Installing and configuring
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="workflow2.html">
+   Running PyCPT 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="MME.html">
+   The multimodel NextGen ensemble
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/mos_setup.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#subx-model-observed-dataset">
+   SubX model &amp; observed dataset
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predictor">
+     Predictor
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predictand">
+     Predictand
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#choice-of-mos-method">
+   Choice of MOS Method
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#forecast-date-and-training-season-length">
+   Forecast date and training season length
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#predictor-and-predictand-spatial-domains">
+   Predictor and Predictand spatial domains
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#forecast-lead-time-intervals">
+   Forecast lead time intervals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#choice-of-training-and-verification-periods">
+   Choice of training and verification periods
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Configuring PyCPT for SubX</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#subx-model-observed-dataset">
+   SubX model &amp; observed dataset
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predictor">
+     Predictor
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predictand">
+     Predictand
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#choice-of-mos-method">
+   Choice of MOS Method
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#forecast-date-and-training-season-length">
+   Forecast date and training season length
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#predictor-and-predictand-spatial-domains">
+   Predictor and Predictand spatial domains
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#forecast-lead-time-intervals">
+   Forecast lead time intervals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#choice-of-training-and-verification-periods">
+   Choice of training and verification periods
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="configuring-pycpt-for-subx">
+<h1>Configuring PyCPT for SubX<a class="headerlink" href="#configuring-pycpt-for-subx" title="Permalink to this headline">#</a></h1>
+<p>We will use the CFSv2, GEFSv12 and FIM SubX models to build a subseasonal MME.</p>
+<p>As in the seasonal case, the application of MOS to subsesasonal forecasts using PyCPT requires the choice of:</p>
+<ul class="simple">
+<li><p>Choose SubX model &amp; observed dataset</p></li>
+<li><p>Select MOS methodology</p></li>
+<li><p>Select predictor &amp; predictand and spatial domains</p></li>
+<li><p>Forecast date and training season</p></li>
+<li><p>Select Forecast lead intervals</p></li>
+</ul>
+<p>First choose a case name for your experiment, a working directory, and specify the CPT root directory.</p>
+<section id="subx-model-observed-dataset">
+<h2>SubX model &amp; observed dataset<a class="headerlink" href="#subx-model-observed-dataset" title="Permalink to this headline">#</a></h2>
+<section id="predictor">
+<h3>Predictor<a class="headerlink" href="#predictor" title="Permalink to this headline">#</a></h3>
+<p>Precipitation from the ECMWF, NCEP-CFSv2, EMC-GEFSv12, ECCC-GEPS6 and ESRL-FIM are ready for use.</p>
+<p><strong>Spatial resolution:</strong> The SubX data is available on a 1-degree grid, while the S2S data is 1.5-degree. Note that the native model resolutions are often finer than these.</p>
+<p>The CFSv2 is available in both S2S and SubX formats.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">########Model (choose between ECMWF, CFSv2, GEFS, CFSv2_SubX, GEPS6) </span>
+<span class="n">model</span><span class="o">=</span><span class="s1">&#39;CFSv2_SubX&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="predictand">
+<h3>Predictand<a class="headerlink" href="#predictand" title="Permalink to this headline">#</a></h3>
+<p>Precipitation from  <a class="reference external" href="http://iridl.ldeo.columbia.edu/SOURCES/.UCSB/.CHIRPS/.v2p0/.daily-improved/.global/.0p25/">CHIRPS</a>
+in the primary precipitation dataset ready for use. Several others can also be chosen (TRMM, CPC, IMD1deg, IMDp25deg).
+Temperature will be added shortly. Rainfall frequency is not yet available in the subseasonal version.</p>
+<p>CHIRPS is regridded to a 0.5-degree grid for use with PyCPT.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">########Obs (choose between CHIRPS, TRMM, CPC, IMD1deg, IMDp25deg)</span>
+<span class="n">obs</span><span class="o">=</span><span class="s1">&#39;CHIRPS&#39;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="choice-of-mos-method">
+<h2>Choice of MOS Method<a class="headerlink" href="#choice-of-mos-method" title="Permalink to this headline">#</a></h2>
+<p>Canonical Correlation Analysis (CCA), Principal Componentes Regression (PCR), and the no-MOS option can all be used for the subseasonal models. Extended Logistic Regression (ELR) (applied gridpoint-by-gridpoint) is under development.</p>
+<p>CCA is currently recommended as the default choice.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">########MOS method (choose between None, PCR, CCA and ELR)</span>
+<span class="n">MOS</span><span class="o">=</span><span class="s1">&#39;CCA&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="forecast-date-and-training-season-length">
+<h2>Forecast date and training season length<a class="headerlink" href="#forecast-date-and-training-season-length" title="Permalink to this headline">#</a></h2>
+<p>Because subseasonal forecasts are initialized every week—many times within each season—the training
+sample of hindcasts can  be increased by selecting multiple start times each year,
+provided these fall within a climatologically homogeneous season (e.g., a monsoon
+season). For example, weekly starts over a 3-month season yields ~12 hindcast
+samples per year, resulting in a total of 12x20=240 hindcasts for a 20-year set of
+hindcasts. This is a much larger training sample than in seasonal applications where only
+one 3-month sample per hindcast year is used, and the number of hindcasts is 40 or less.</p>
+<p><em>This is a major difference between subseasonal and seasonal PyCPT, potentially allowing
+more robust subseasonal forecasts to be built.</em></p>
+<p>PyCPT allows the <code class="docutils literal notranslate"><span class="pre">training_season</span></code> length to be set as one or more contiguous calendar months,
+which should be specified around the forecast start date, controlled by the choices of <code class="docutils literal notranslate"><span class="pre">mon</span></code>, <code class="docutils literal notranslate"><span class="pre">fyr</span></code> and <code class="docutils literal notranslate"><span class="pre">fday</span></code> parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">########Forecast date  </span>
+<span class="c1">##-- If ECMWF, it needs to be a Monday or a Thursday! CFSv2: any day; GEFS: Wednesdays.</span>
+<span class="n">mon</span><span class="o">=</span><span class="s1">&#39;Jun&#39;</span> 	<span class="c1"># Forecast month </span>
+<span class="n">fyr</span><span class="o">=</span><span class="mi">2020</span> 	<span class="c1"># Forecast year</span>
+<span class="n">fday</span><span class="o">=</span><span class="mi">1</span> 	<span class="c1"># Forecast day  (Monday and Thursday in ECMWF model; yesterday in CFSv2: real time)</span>
+<span class="c1">#training_season=mon </span>
+<span class="n">training_season</span><span class="o">=</span><span class="s1">&#39;May-Jul&#39;</span>  <span class="c1"># with *mon* in the middle, e.g., &#39;May-Jul&#39; if mon=&#39;Jun&#39;</span>
+</pre></div>
+</div>
+<p>The sensitivity of the results to the length of season <code class="docutils literal notranslate"><span class="pre">training_season</span></code> (e.g., 1 month vs 3 months) should be checked, bearing in mind that small sample sizes may lead to large sampling variability in skill scores.</p>
+</section>
+<section id="predictor-and-predictand-spatial-domains">
+<h2>Predictor and Predictand spatial domains<a class="headerlink" href="#predictor-and-predictand-spatial-domains" title="Permalink to this headline">#</a></h2>
+<p>When using CCA (and PCR), the predictor domain should be chosen large enough
+to resolve the regional structure of the S2S modes of predictability impacting the region. It is usually set somewhat larger than the predictand domain, so as to resolve
+the regional large-scale structure of the S2S modes in the forecast model.</p>
+<p>West Africa example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Spatial domain for predictor</span>
+<span class="n">nla1</span><span class="o">=</span> <span class="mi">30</span> <span class="c1"># Northernmost latitude </span>
+<span class="n">sla1</span><span class="o">=-</span><span class="mi">5</span> <span class="c1"># Southernmost latitude </span>
+<span class="n">wlo1</span><span class="o">=-</span><span class="mi">30</span> <span class="c1"># Westernmost longitude </span>
+<span class="n">elo1</span><span class="o">=</span> <span class="mi">30</span> <span class="c1"># Easternmost longitude</span>
+<span class="c1"># Spatial domain for predictand</span>
+<span class="n">nla2</span><span class="o">=</span> <span class="mi">20</span> <span class="c1"># Northernmost latitude </span>
+<span class="n">sla2</span><span class="o">=</span> <span class="mi">1</span> <span class="c1"># Southernmost latitude </span>
+<span class="n">wlo2</span><span class="o">=-</span><span class="mi">20</span> <span class="c1"># Westernmost longitude </span>
+<span class="n">elo2</span><span class="o">=</span> <span class="mi">10</span> <span class="c1"># Easternmost longitude</span>
+</pre></div>
+</div>
+<a class="bg-primary reference internal image-reference" href="img/domains.png"><img alt="fishy" class="bg-primary align-left" src="img/domains.png" style="width: 600px;" /></a>
+</section>
+<section id="forecast-lead-time-intervals">
+<h2>Forecast lead time intervals<a class="headerlink" href="#forecast-lead-time-intervals" title="Permalink to this headline">#</a></h2>
+<p>The lead time intervals define how far into the future we wish to predict, and over what
+length of the time the forecast should be averaged. PyCPT will develop a separate MOS
+for each interval. For simplicity, these are defined as a number of “weeks” but
+the start and end (lead) days defining each can be chosen at will.</p>
+<p><code class="docutils literal notranslate"><span class="pre">nwk</span></code> controls the number of times that CPT will be run (once for each lead time).
+Setting <code class="docutils literal notranslate"><span class="pre">nwk=1</span></code> (week 1) can save time when testing your set-up. The skill should be high
+in week 1and will generally drop a lot in weeks 2–4.</p>
+<p>Note that the precise values of <code class="docutils literal notranslate"><span class="pre">day1</span></code> and <code class="docutils literal notranslate"><span class="pre">day2</span></code> depend on the chosen model and variable.
+Follow the instructions in the Jupyter notebook:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">########Forecast lead interval  -- This counts using L, the lead time; e.g., ECMWF L=0..46 (NOT calendar days)</span>
+<span class="n">nwk</span><span class="o">=</span><span class="mi">4</span> <span class="c1"># Number of weeks to process (leads)</span>
+<span class="c1"># Lists for looping over lead times -- ALL these arrays should have the same dimension (see nwk above), as they correspond</span>
+<span class="n">wk</span> <span class="o">=</span>   <span class="p">[</span><span class="mi">1</span>       <span class="p">,</span><span class="mi">2</span>       <span class="p">,</span><span class="mi">3</span>       <span class="p">,</span><span class="mi">34</span>       <span class="p">,</span><span class="mi">4</span>       <span class="p">]</span>  <span class="c1"># week-lead number label (e.g., corresponding to week1, week2, week3, week4, week1-4/month 1)</span>
+<span class="n">wknam</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Week 1&#39;</span><span class="p">,</span><span class="s1">&#39;Week 2&#39;</span><span class="p">,</span><span class="s1">&#39;Week 3&#39;</span><span class="p">,</span><span class="s1">&#39;Week 3-4&#39;</span><span class="p">,</span><span class="s1">&#39;Month 1&#39;</span><span class="p">]</span>  <span class="c1">#naming the weeks (for plots) --can use a different language here</span>
+<span class="n">day1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span>       <span class="p">,</span><span class="mi">7</span>       <span class="p">,</span><span class="mi">14</span>      <span class="p">,</span><span class="mi">14</span>      <span class="p">,</span><span class="mi">21</span>        <span class="p">]</span>  <span class="c1"># first lead day of target weeks </span>
+<span class="n">day2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span>       <span class="p">,</span><span class="mi">14</span>      <span class="p">,</span><span class="mi">21</span>      <span class="p">,</span><span class="mi">28</span>      <span class="p">,</span><span class="mi">28</span>       <span class="p">]</span>  <span class="c1"># last lead day of target weeks </span>
+<span class="c1"># ECMWF - first day is day 0, 0000Z accumulated rainfall; specify day1=1 for week 1</span>
+<span class="c1"># GEFS - first day is day 0.5 (daily average rainfall rate); specify day1=0 for week 1</span>
+<span class="c1"># CFSv2 - first day is day 1, 0000Z accumulated rainfall over the first day; specify day1=1 for week 1</span>
+</pre></div>
+</div>
+</section>
+<section id="choice-of-training-and-verification-periods">
+<h2>Choice of training and verification periods<a class="headerlink" href="#choice-of-training-and-verification-periods" title="Permalink to this headline">#</a></h2>
+<p>The limited hindcast period (20 years at most for S2S) must be used to both train and assess skill (verification), each of which requires large sets of <strong>independent</strong> non-overlapping data.</p>
+<p>CPT distinguishes deteriministic <a class="reference external" href="https://iri.columbia.edu/~awr/CPT/17.5.1/help/CPT_use_results_validation.html"><strong>Model Validation Measures</strong></a>
+from probabilistic <a class="reference external" href="https://iri.columbia.edu/~awr/CPT/17.5.1/help/CPT_use_results_verification.html"><strong>Forecast Verification</strong></a>.  CPT does not enable probabilistic scores (like RPSS) to be computed using cross-validation because the cross-validated hindcast errors are used to compute forecast spread. Since the left-out obs data is already used once, it cannot be used a second time assess the skill of forecast probabilities. CPT solves this dilemma using <a class="reference external" href="https://iri.columbia.edu/~awr/CPT/17.5.1/help/Actions_Retro.html">Retroactive Forecasting</a> which mimics real-time forecasting: only data prior to the hindcast year is used to train the model.</p>
+<p><em>Illustration of Retroactive Forecasting in seasonal case.</em></p>
+<a class="bg-primary reference internal image-reference" href="_images/retroactive.png"><img alt="fishy" class="bg-primary align-left" src="_images/retroactive.png" style="width: 600px;" /></a>
+<p>PyCPT-Subseasonal uses Retroactive Forecasting to train and verify the MOS model.
+This requires choosing the length of initial training period <code class="docutils literal notranslate"><span class="pre">lit</span></code> and the update interval  <code class="docutils literal notranslate"><span class="pre">liti</span></code> (both in numbers of hindcast samples).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lit</span><span class="o">=</span><span class="mi">80</span> <span class="c1"># Initial training period for retroactive forecasts (in timesteps) </span>
+<span class="n">liti</span><span class="o">=</span><span class="mi">10</span> <span class="c1"># Update interval for retroactive forecasts (in timesteps)</span>
+</pre></div>
+</div>
+<p>A simple rule of thumb is to set <code class="docutils literal notranslate"><span class="pre">lit</span></code> equal to 50% of the hindcast dataset and <code class="docutils literal notranslate"><span class="pre">liti</span></code> to update once a year. For example, given a 20-yr set of twice-weekly hindcasts for the month of June,  <code class="docutils literal notranslate"><span class="pre">lit=80</span></code> would equate with 10 years x 1 month x 8 starts per month, i.e. about 50%. Setting <code class="docutils literal notranslate"><span class="pre">liti=10</span></code> updates the model every 5 weeks if the forecasts are twice weekly.</p>
+<p>The values of <code class="docutils literal notranslate"><span class="pre">lit</span></code> and <code class="docutils literal notranslate"><span class="pre">liti</span></code> should be adjusted in the following block of code, if needed. The default values should be fine in most cases.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">########Model-dependent parameters</span>
+<span class="k">if</span> <span class="n">model</span><span class="o">==</span><span class="s1">&#39;CFSv2&#39;</span><span class="p">:</span>
+    <span class="n">hstep</span> <span class="o">=</span> <span class="mi">7</span> <span class="c1"># use all starts in the trainng period with this daily step between them </span>
+    <span class="n">nlag</span>  <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># length of the lagged ensemble in days</span>
+    <span class="n">ntrain</span><span class="o">=</span> <span class="mi">55</span> <span class="c1"># Length of training period (5 weeks x 11 hindcast years) (363 before)</span>
+    <span class="n">lit</span> <span class="o">=</span>  <span class="mi">28</span>
+    <span class="n">liti</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">elif</span> <span class="n">model</span><span class="o">==</span><span class="s1">&#39;ECMWF&#39;</span> <span class="ow">or</span> <span class="n">model</span><span class="o">==</span><span class="s1">&#39;ECMWFrt&#39;</span><span class="p">:</span>
+    <span class="n">hstep</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># bogus but needed by functions (eliminate in the future)</span>
+    <span class="n">nlag</span>  <span class="o">=</span> <span class="mi">0</span> <span class="c1"># bogus but needed by functions (eliminate in the future)</span>
+    <span class="n">ntrain</span><span class="o">=</span> <span class="mi">160</span>  <span class="c1"># Length of training period</span>
+    <span class="n">lit</span> <span class="o">=</span>  <span class="mi">110</span>
+    <span class="n">liti</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="k">elif</span> <span class="n">model</span><span class="o">==</span><span class="s1">&#39;GEFS&#39;</span><span class="p">:</span>
+    <span class="n">hstep</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># bogus but needed by functions (eliminate in the future)</span>
+    <span class="n">nlag</span>  <span class="o">=</span> <span class="mi">0</span> <span class="c1"># bogus but needed by functions (eliminate in the future)</span>
+    <span class="n">ntrain</span><span class="o">=</span> <span class="mi">219</span>  <span class="c1"># Length of training period (1999-2016)</span>
+    <span class="n">lit</span> <span class="o">=</span>  <span class="mi">100</span>
+    <span class="n">liti</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="k">elif</span> <span class="n">model</span><span class="o">==</span><span class="s1">&#39;GEPS6&#39;</span><span class="p">:</span>
+    <span class="n">hstep</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># bogus but needed by functions (eliminate in the future)</span>
+    <span class="n">nlag</span>  <span class="o">=</span> <span class="mi">0</span> <span class="c1"># bogus but needed by functions (eliminate in the future)</span>
+    <span class="n">ntrain</span><span class="o">=</span> <span class="mi">260</span>  <span class="c1"># Length of training period (1998-2017) </span>
+    <span class="n">GEPShdate1</span> <span class="o">=</span> <span class="s1">&#39;0000 4 Jun&#39;</span> <span class="c1"># first hindcast date each year in training season</span>
+    <span class="c1"># Must be a THURSDAY in the forecast year since GEPS is an on-the-fly model</span>
+    <span class="n">GEPShdate1</span> <span class="o">=</span> <span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">GEPShdate1</span><span class="p">)</span>
+    <span class="n">lit</span> <span class="o">=</span>  <span class="mi">120</span>
+    <span class="n">liti</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="k">elif</span> <span class="n">model</span><span class="o">==</span><span class="s1">&#39;CFSv2_SubX&#39;</span><span class="p">:</span>
+    <span class="n">hstep</span> <span class="o">=</span> <span class="mi">7</span> <span class="c1"># use all starts in the trainng period with this daily step between them </span>
+    <span class="n">nlag</span>  <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># length of the lagged ensemble in days</span>
+    <span class="n">ntrain</span><span class="o">=</span> <span class="mi">234</span> <span class="c1"># Length of training period for 3 month season (1638/7=234)</span>
+    <span class="n">lit</span> <span class="o">=</span>  <span class="mi">100</span>
+    <span class="n">liti</span> <span class="o">=</span> <span class="mi">20</span>
+</pre></div>
+</div>
+<p>Note that there is a danger of <strong>overfitting</strong> the MOS model if the skill results are “tuned” to maximize them, unless some independent data is available to re-test model. This could be a set of forecasts outside of the SubX 1999–2016 hindcast period, for example.</p>
+<p>In machine learning, the data is often split into three parts: the training, validation and test sets. The training dataset is used to actually fit the model. The validation dataset is used during experimentation to check the model performance on data not seen during training. But, as mentioned above, there is the danger that through continued tuning of hyperparameters one unwillingly overfits to the validation dataset. Therefore, a third, test dataset for final evaluations of model performance is used. Typically this final test dataset may sometimes be restricted to a few recent years. [Rasp]</p>
+<hr class="docutils" />
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By IRI Climate Group<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

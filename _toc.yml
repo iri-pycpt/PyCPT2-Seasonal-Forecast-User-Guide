@@ -1,0 +1,16 @@
+# Table of content
+# Learn more at https://jupyterbook.org/customize/toc.html
+#
+format: jb-book
+root: intro
+chapters:
+- file: nextgen
+- file: cpt 
+- file: workflow1
+- file: workflow2
+- file: MME
+- file: references
+#- file: content
+#  sections:
+#    - file: markdown
+#    - file: notebooks
