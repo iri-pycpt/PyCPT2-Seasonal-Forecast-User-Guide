@@ -1,9 +1,9 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Guide to PyCPT 2 for Seasonal Climate Forecasts
+title: Guide to PyCPT 2.5 for Seasonal Climate Forecasts
 author: IRI Climate Group
-# author: Andrew Robertson, Kyle Hall, Simon Mason, Ángel Muñoz, Bohar Singh, Sylwia Trzaska, IRI
+# author: Andrew Robertson, Azhar Ehsan, Aaron Kaplan, Simon Mason, Ángel Muñoz, Bohar Singh, Sylwia Trzaska, IRI
 # logo: logo.png
 logo: img/pycpt_logo.png
 

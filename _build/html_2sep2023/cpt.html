@@ -1,0 +1,537 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>The Climate Predictability Tool (CPT) &#8212; Guide to PyCPT 2 for Seasonal Climate Forecasts</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'cpt';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation of PyCPT 2.5" href="installation.html" />
+    <link rel="prev" title="The NextGen Approach" href="nextgen.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/pycpt_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/pycpt_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="nextgen.html">The NextGen Approach</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">The Climate Predictability Tool (CPT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation of PyCPT 2.5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running.html">Running PyCPT 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MME.html">The multimodel NextGen ensemble</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/cpt.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>The Climate Predictability Tool (CPT)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-model-validation-and-selection">1. Regression model validation (and selection)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation">2. Cross-Validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-forecasts">3. Probabilistic forecasts</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="the-climate-predictability-tool-cpt">
+<span id="cpt-section-label"></span><h1>The Climate Predictability Tool (CPT)<a class="headerlink" href="#the-climate-predictability-tool-cpt" title="Permalink to this heading">#</a></h1>
+<a class="bg-primary reference internal image-reference" href="_images/CPT.png"><img alt="fishy" class="bg-primary align-left" src="_images/CPT.png" style="width: 800px;" /></a>
+<p>IRI created the <a class="reference external" href="https://iri.columbia.edu/our-expertise/climate/tools/cpt/">Climate Predictability Tool (CPT)</a>—at the heart of PyCPT—to facilitate the development of best-practices in statistical/empirical seasonal climate forecasting for NMHSs using multiple linear regression. These were typically based on slowly-evolving SST patterns associated with ENSO as predictors. CPT uses the principle of cross-validation to build and validate multiple linear regression models, and to select the best model.</p>
+<p>Because seasonal climate predictability in the tropics involves spatially-correlated patterns of precipitation anomalies associated with patterns of ENSO SST variations, CPT provides two types of <strong>pattern regression:</strong> Canonical Correlational Analysis (CCA) and Principal Components Regression (PCR).</p>
+<ul class="simple">
+<li><p>PCR considers a univariate predictand (at a local gridpoint), together with a truncated set of the Principal Components (PCs) of the predictor field; it enables a data compression of a large field of predictor grid points that is optimal in variance, with statistically independent predictor time series.</p></li>
+<li><p>CCA compresses both a high-dimensional predictor and a high-dimensional predictand field into a few components of each (the CCA modes), such that the timeseries of these components are maximally correlated between predictor and predictand fields. The CCA modes consist of linear combinations of the leading EOFs of the predictor and predictand fields.</p></li>
+</ul>
+<section id="regression-model-validation-and-selection">
+<h2>1. Regression model validation (and selection)<a class="headerlink" href="#regression-model-validation-and-selection" title="Permalink to this heading">#</a></h2>
+<a class="bg-primary reference internal image-reference" href="_images/validationSelection.png"><img alt="fishy" class="bg-primary align-left" src="_images/validationSelection.png" style="width: 800px;" /></a>
+<p>The CPT model validation and selection workflow is as follows:</p>
+<ol class="arabic simple">
+<li><p>Test the performance of the regression model using independent data</p></li>
+<li><p>This is done using cross-validation in CPT</p></li>
+<li><p>Various skill scores are used to assess the validity of the model</p></li>
+<li><p>Note that these are all deterministic skill scores because the regression model is deterministic</p></li>
+<li><p>Validation enables the best model to be selected.</p></li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>“Trying too hard” can lead to overestimating the skill just by chance; this is called selection bias.</p>
+</div>
+</section>
+<section id="cross-validation">
+<h2>2. Cross-Validation<a class="headerlink" href="#cross-validation" title="Permalink to this heading">#</a></h2>
+<p>Cross-validation consists of training a new CCA/PCR model for each hindcast year, omitting that year from the training data set. This is called “leave 1 out” cross-validation and enables the resulting model to be properly tested against the observation year that was withheld from the training.</p>
+<a class="bg-primary reference internal image-reference" href="_images/leave1outXV.png"><img alt="fishy" class="bg-primary align-left" src="_images/leave1outXV.png" style="width: 800px;" /></a>
+<p>Leaving out more years reduces the negative bias in skill that arises with leave 1 out cross-validation, although leaving too many years out causes large sampling errors. Good compromises are to leave 3 or 5 years out.</p>
+<a class="bg-primary reference internal image-reference" href="_images/leave5outXV.png"><img alt="fishy" class="bg-primary align-left" src="_images/leave5outXV.png" style="width: 800px;" /></a>
+</section>
+<section id="id1">
+<h2><a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="probabilistic-forecasts">
+<h2>3. Probabilistic forecasts<a class="headerlink" href="#probabilistic-forecasts" title="Permalink to this heading">#</a></h2>
+<p>Once a suitable PCR or CCA regression model has been established, CPT uses it to create probabilistic forecasts. However, the regression model is deterministic. Probabilistic forecasts are created by assuming a parametric form for the forecast PDF (for example a normal bell-curve). The regression model provides the mean of the forecast PDF; its variance (spread) is determined from the errors of the regression model’s cross-validated hindcasts.  Setting the forecast spread to equal the model’s error-variance ensures that the resulting probabilistic forecasts are well calibrated - i.e., that their confidence reflects their historical accuracy.</p>
+<p>(add equation for the forecast pdf)</p>
+<a class="bg-primary reference internal image-reference" href="_images/hindcastErrors.png"><img alt="fishy" class="bg-primary align-left" src="_images/hindcastErrors.png" style="width: 400px;" /></a>
+<div class="admonition-slide-presentation admonition">
+<p class="admonition-title">Slide presentation</p>
+<p><a class="reference external" href="https://www.dropbox.com/s/yym7pb89842dsfx/CPT_concepts_Lome.pdf?dl=0">See slides on the CPT approach</a>
+from the AICCRA West Africa Regional Improved NextGen Seasonal Forecasting (PyCPT 2) <a class="reference external" href="https://wiki.iri.columbia.edu/index.php?n=NextGen.AICCRA-Lome-Oct2022">Training,</a> October 10-19, 2022, Lomé, Togo.]</p>
+</div>
+<!-- 
+## Some CPT usage recommendations
+
+(I think the text below is pitched at the rigt level but needs improving)
+
+### Overview
+__Analysis options:__ There are five analysis options in CPT: canonical correlational analysis (CCA), principal component regression (PCR), multiple linear regression (MLR), GCM validation, probabilistic forecast verification (PFV). 
+
+Beginner mode options: In beginner mode, these options are reduced to forecast (CPT automatically chooses CCA for this unless otherwise indicated), GCM validation and forecast verification. 
+__Purpose of different analysis options:__ The purpose of GCM validation is to compare GCM output data (X data) to observations (Y data) during a historical time period – outputs include estimates of GCM bias. It should be noted that one can make forecasts using GCM output as well, but the GCM validation functionality is designed to evaluate GCM outputs on a grid to grid or grid to station basis. The purpose of PFV is to compare a probabilistic forecast input (X data) with observations (Y data). The purpose of MLR, PCR and CCA is to make forecasts on the basis of an overlapping training window between the predictor and predictand. 
+
+__Selecting the best prediction tool:__ If both your predictor and predictand data are “index data” (a time series from an index or station rather than gridded data) and you wish to make a forecast, you should select MLR (this method will work for a single index predictor or a predictor file with multiple indices/stations but will not work with gridded data). If either your predictor or your predictand is an index file and the other is gridded, or if they are both gridded, you may choose PCR. If both are gridded arrays, generally, CCA is preferable to PCR. 
+
+__Selection Guidelines:__ The predictand file should be over your region of interest and can be quite small (eg. Rwanda). The predictor domain should generally be larger (eg. SSTs over a major tropical ocean basin, GCM rainfall or wind over a larger region eg. E. Africa) 
+Select predictor domains and variables that reflect well-known physical climate mechanisms (eg. ENSO, IOD).
+
+Begin your analysis with about 8 to 10 modes of consideration for X and Y predictors and CCA  modes.
+Use a relatively long training period and make a forecast for the current year. One can also make forecasts for several recent years, and separately compare with observations. But in the process of running a forecast, one can also examine how the hindcasts of recent years compared to the observations. 
+
+### How to judge whether a CPT forecast is any good
+__Goodness index:__ A goodness index above zero preferred, above 0.2 is good for most applications and a goodness index between 0.1 and 0.2 is OK for some applications (keep in mind that if your training window is very short, you need a higher goodness index to justify the forecast). If the goodness index is negative, this means the forecast is worse than simply forecasting climatology repeatedly, so it should probably be discarded and you should probably try a different predictor or different predictor parameters).
+
+__Test for overfitting:__ If the CPT analysis selects 8 or more modes as optimal…in Y as well as X or even just in one…if so, some skepticism may be warranted.
+
+__Pearson and/or Spearman and/or other skill map correlations:__                                   (from the Tools->Validation dropdown); The skill maps should be positive or neutral almost everywhere (although a few points of negative correlation on a high resolution grid are not necessarily a problem if the vast majority of the region has a strong positive correlation).
+
+__Mode maps for the CCA option:__ The leading X predictor mode should show some sort of physical relationship (sometimes it is strong trend, sometimes it is a dipole if SST and sometimes it is less clear), Y mode should be a deep relatively homogenous color (either blue or red – especially if it is a small spatial domain). 
+When interpreting the mode maps, keep sign conventions in mind…(if one model shows mostly blue (negative) loadings for the predictand and a negative Indian Ocean Dipole phase and another model shows red (positive) loadings for the predictand and a positive Indian Ocean Dipole phase, the two models are essentially telling the same qualitative story). 
+
+-Climatology (Tools -> climatological maps dropdown) – verify that the climatology is what it is supposed to be. 
+__Scree plots__ There are two potential issues; if the leading mode explains very little variance and if the last modes in the optimization explain exceptionally little variance. By construct, the percentage of variance explained will decrease with each mode and the sum of the percentage of variance explained of all the modes must equal 100%. However, if the last few “optimal” modes explain very little variance, the forecast model is likely overfit.  If there is very little variance explained by the leading mode (especially if the domain is smaller), this may be indicative of a weaker forecast (although not necessarily). 
+
+__Verify hindcasts against past seasons’ observational data__
+
+-Analyze the error of past forecasts with observational data: if the user has a network of station data readily available after the season has passed, it is beneficial to compare the actual observed rainfall at multiple stations to the forecast rainfall and to calculate how close the forecast was to the observations. For locations with large errors, it may also be advisable to look at the forecast rainfall for nearby locations…a forecast model may get the general anomaly correct, but may have a slight spatial bias in the placement of certain meteorological features. 
+ -->
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="nextgen.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">The NextGen Approach</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="installation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Installation of PyCPT 2.5</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-model-validation-and-selection">1. Regression model validation (and selection)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation">2. Cross-Validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-forecasts">3. Probabilistic forecasts</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By IRI Climate Group
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

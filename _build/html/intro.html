@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Introduction &#8212; Guide to PyCPT 2 for Seasonal Climate Forecasts</title>
+    <title>Introduction &#8212; Guide to PyCPT 2.5 for Seasonal Climate Forecasts</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -96,7 +96,7 @@ const thebe_selector_output = ".output, .cell_output"
       <img src="_static/pycpt_logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Guide to PyCPT 2 for Seasonal Climate Forecasts</h1>
+      <h1 class="site-logo" id="site-title">Guide to PyCPT 2.5 for Seasonal Climate Forecasts</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -124,13 +124,18 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="workflow1.html">
-   Installing and configuring
+  <a class="reference internal" href="installation.html">
+   Installing PyCPT 2.5
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="workflow2.html">
-   Running PyCPT 2
+  <a class="reference internal" href="configuration.html">
+   Configuring PyCPT 2.5
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="running.html">
+   Running PyCPT 2.5
   </a>
  </li>
  <li class="toctree-l1">
@@ -287,26 +292,26 @@ title="Print to PDF"
 :align: left
 ```
  -->
-<p>Welcome to <strong>PyCPT Version 2 for Seasonal Climate Forecasts!</strong> The goal of this tutorial is to learn how to
-configure and run PyCPT, Version 2, in order to make, calibrate and verify
+<p>Welcome to <strong>PyCPT Version 2.5 for Seasonal Climate Forecasts!</strong> The goal of this tutorial is to learn how to
+configure and run PyCPT, Version 2.5+, in order to make, calibrate and verify
 multi-model seasonal forecasts of precipitation based on the <a class="reference external" href="https://www.cpc.ncep.noaa.gov/products/NMME/">NOAA North American Multi-Model Ensemble (NMME) </a>
-and European <a class="reference external" href="https://climate.copernicus.eu">Copernicus Climate Change Service (C3S) </a> databases. PyCPT helps to implement the <a class="reference internal" href="nextgen.html#nextgen-section-label"><span class="std std-ref">NextGen approach</span></a> using the <a class="reference internal" href="cpt.html#cpt-section-label"><span class="std std-ref">Climate Predictability Tool (CPT)</span></a>.</p>
-<p>The PyCPT set-up and results are illustrated for a West African precipitation forecast example for Jun-Sep 2022, initialized in May 2022. The example uses a two-model multimodel ensemble of the NCEP CFSv2 and ECMWF SEAS5 models.</p>
-<div class="admonition-pycpt-2-is admonition">
-<p class="admonition-title">PyCPT 2 is:</p>
+and European <a class="reference external" href="https://climate.copernicus.eu">Copernicus Climate Change Service (C3S) </a> databases, obtained from <a class="reference external" href="http://iridl.ldeo.columbia.edu">IRI Data Library</a>. PyCPT helps to implement the <a class="reference internal" href="nextgen.html#nextgen-section-label"><span class="std std-ref">NextGen approach</span></a> using the <a class="reference internal" href="cpt.html#cpt-section-label"><span class="std std-ref">Climate Predictability Tool (CPT)</span></a>.</p>
+<p>The PyCPT set-up and results are illustrated for a West African precipitation forecast example for Jun-Sep 2023, initialized in May 2023. The example uses a two-model multimodel ensemble of the NCEP CFSv2 and ECMWF SEAS5 models.</p>
+<div class="admonition-pycpt-2-5-is admonition">
+<p class="admonition-title">PyCPT 2.5 is:</p>
 <ul class="simple">
 <li><p>a rewrite of PyCPT based on <a class="reference external" href="https://docs.xarray.dev/en/stable/">Xarray</a> and a <a class="reference external" href="https://github.com/iri-pycpt">new set of Python libraries</a> that provide a Python interface to the CPT fortran-based package, and facilitate access to GCM forecasts/hindcasts and observational gridded datasets via <a class="reference external" href="http://iridl.ldeo.columbia.edu">IRI Data Library</a></p></li>
-<li><p>easily customizable  to individual forecaster needs using Jupyter Notebooks, by importing the four new Python modules, available via the <code class="docutils literal notranslate"><span class="pre">iri-nextgen</span></code> conda channel</p></li>
-<li><p>designed to be run natively using Python on linux, Windows and Mac (feature still in progress for Windows)</p></li>
-<li><p>designed to facilitiate the use of observational gridded datasets, such as <a class="reference external" href="https://iri.columbia.edu/resources/enacts/">ENACTS,</a> from the user’s laptop in NetCDF or CPTv10.tsv format. (feature still in progress)</p></li>
+<li><p>designed to be run natively using Python on linux, Windows and Mac</p></li>
+<li><p>easily installed by downloading a python conda environment file for your platform</p></li>
+<li><p>easily customizable  to individual forecaster needs using Jupyter Notebooks</p></li>
+<li><p>enables the use of observational predictand gridded datasets, such as <a class="reference external" href="https://iri.columbia.edu/resources/enacts/">ENACTS,</a> from the user’s laptop in  CPTv10.tsv format.</p></li>
 </ul>
 </div>
 <p><strong>Who is this guide for?</strong></p>
 <p>Basic familiarity with Python, seasonal climate forecasting, and IRI’s <a class="reference external" href="http://iri.columbia.edu/tools/">Climate Predictability Tool (CPT)</a> is assumed.</p>
 <p><strong>Acknowledgments</strong></p>
-<p>The Guide to PyCPT2 for Seasonal Climate Forecasts and its associated teaching and learning materials represents a collaborative effort, made possible by the IRI’s dedicated team of climate, sectoral, and technical experts in collaboration with the Accelerating Impacts of CGIAR Climate Research for Africa (AICCRA) project.</p>
+<p>The guide to PyCPT2.5 for Seasonal Climate Forecasts and its associated teaching and learning materials represents a collaborative effort, made possible by the IRI’s dedicated team of climate, sectoral, and technical experts in collaboration with the Accelerating Impacts of CGIAR Climate Research for Africa (AICCRA) project.</p>
 <p><a class="reference external" href="https://aiccra.cgiar.org">Accelerating Impacts of CGIAR Climate Research for Africa (AICCRA)</a> is a project that helps deliver a climate-smart African future driven by science and innovation in agriculture. It is led by the Alliance of Bioversity International and CIAT and supported by a grant from the International Development Association (IDA) of the World Bank.</p>
-<a class="bg-primary reference internal image-reference" href="_images/AICCRA_Logo.png"><img alt="fishy" class="bg-primary align-left" src="_images/AICCRA_Logo.png" style="width: 800px;" /></a>
 <hr class="docutils" />
 <div class="toctree-wrapper compound">
 </div>

@@ -1,0 +1,537 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>The multimodel NextGen ensemble &#8212; Guide to PyCPT 2 for Seasonal Climate Forecasts</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'MME';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="References" href="references.html" />
+    <link rel="prev" title="Running PyCPT 2.5" href="running.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/pycpt_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/pycpt_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="nextgen.html">The NextGen Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpt.html">The Climate Predictability Tool (CPT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installing PyCPT 2.5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuring PyCPT 2.5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running.html">Running PyCPT 2.5</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">The multimodel NextGen ensemble</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/MME.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>The multimodel NextGen ensemble</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">The multimodel NextGen ensemble</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-mme-hindcast-skill">1. Plot MME Hindcast Skill</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-mme-forecast-maps">2. Plot the MME forecast maps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-mme-flexible-forecast">2. Plot MME Flexible forecast</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="the-multimodel-nextgen-ensemble">
+<h1>The multimodel NextGen ensemble<a class="headerlink" href="#the-multimodel-nextgen-ensemble" title="Permalink to this heading">#</a></h1>
+<p>First we need to select a subset of GCMs to include in the MME. Factors to consider are:</p>
+<ul class="simple">
+<li><p>deterministic skill maps for the individual models: All skill scores should be generally positive across the map</p></li>
+<li><p>their CCA/EOF modes: The CCA modes of each model should be physically interpretable and the CC coefficient should generally be about 0.4 or more.</p></li>
+<li><p>the forecast maps: Any differences in polarity between models should be confirmed by looking at the global maps from the NMME and C3S websites.</p></li>
+</ul>
+<p>Although the CFSv2 model skill is low in our West African example, we will still include it in our two-model MME for demonstration purposes.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ensemble</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CFSv2.PRCP&#39;</span><span class="p">,</span><span class="s1">&#39;SEAS5.PRCP&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The MME is constructed as the <strong>unweighted average</strong> of forecasts or hindcasts of the individual models. This is done for the deterministic values as well as for the tercile-category probabilities, in order to create both multi-model deterministic and probabilistic hindcasts and forecasts. The prediction error variances are also averaged across models in order to compute the spread of the MME flexible forecasts (see below).</p>
+<section id="plot-mme-hindcast-skill">
+<h2>1. Plot MME Hindcast Skill<a class="headerlink" href="#plot-mme-hindcast-skill" title="Permalink to this heading">#</a></h2>
+<p>The multi-model deterministic and probabilistic hindcasts are evaluated using a suite of skill metrics using CPT’s <code class="docutils literal notranslate"><span class="pre">GCM</span> <span class="pre">Validation</span></code> and <code class="docutils literal notranslate"><span class="pre">Probabilistic</span> <span class="pre">Forecast</span> <span class="pre">Verification</span></code> procedures.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To see all the skill scores available, insert a new cell in the Notebook (before the plotting cell) and type <code class="docutils literal notranslate"><span class="pre">nextgen_skill</span></code>. You will see an xarray dataset that contains all the skill scores available for the MME hindcasts.</p>
+</div>
+<p>We will select four skill metrics, two deterministic (Spearman and 2AFC) and two probabilistic (GROC and RPSS).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">skill_metrics</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;spearman&#39;</span><span class="p">,</span><span class="s1">&#39;2afc&#39;</span><span class="p">,</span> <span class="s1">&#39;generalized_roc&#39;</span><span class="p">,</span> <span class="s1">&#39;rank_probability_skill_score&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Comparing the two deterministic measures with the individual model maps, the MME <strong>Spearman</strong> correlation is generally positive and it slightly enhanced compared to the better individual model (<code class="docutils literal notranslate"><span class="pre">SEAS5</span></code>), and is much better than that of <code class="docutils literal notranslate"><span class="pre">CFSv2</span></code>. However, the <strong>2AFC</strong> eludes a simple interpretation compared to that of the individual models; the MME 2AFC exceeds that of climatology only in the southern part.</p>
+<p>The MME RPSS is positive everywhere–exceeding climatological skill–confirming that the hindcasts are probabilistically reliable.  The MME’s GROC also exceeds that of climatology almost everywhere, and is particularly high in the north.</p>
+<p>(need more guidance on this)</p>
+<a class="bg-primary reference internal image-reference" href="_images/MME_skill.png"><img alt="fishy" class="bg-primary align-left" src="_images/MME_skill.png" style="width: 800px;" /></a>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="plot-the-mme-forecast-maps">
+<h2>2. Plot the MME forecast maps<a class="headerlink" href="#plot-the-mme-forecast-maps" title="Permalink to this heading">#</a></h2>
+<p>The MME forecast is shown below in both tercile probabilities and anomaly (deterministic) format. The above-normal category dominates the forecasts almost everywhere, and the seasonal rainfall anomaly is correspondingly largely positive.</p>
+<a class="bg-primary reference internal image-reference" href="_images/MME_forecast_rev.png"><img alt="fishy" class="bg-primary align-left" src="_images/MME_forecast_rev.png" style="width: 600px;" /></a>
+<div class="admonition-interpretation admonition">
+<p class="admonition-title">Interpretation</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">CFSv2</span></code> and <code class="docutils literal notranslate"><span class="pre">SEAS5</span></code> calibrated precipitation forecasts over W Africa have different structures: anomalously wet across the whole region vs wetter in the north and dryer in the south respectively. The MME of the two models together is dominated by the  <code class="docutils literal notranslate"><span class="pre">CFSv2</span></code>. This highlights the limitation of our 2 model MME. <strong>The use of at least 3-4 models is recommended.</strong></p>
+</div>
+</section>
+<section id="plot-mme-flexible-forecast">
+<h2>2. Plot MME Flexible forecast<a class="headerlink" href="#plot-mme-flexible-forecast" title="Permalink to this heading">#</a></h2>
+<p>The final section of the notebook plots a map of the probability of exceedance (PoE) of any selected threshold, and the exceedance and PDF curves for a selected gridpoint:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># if &#39;isPercentile is True, the threshold is a percentile (e.g., 0.5)</span>
+<span class="c1"># else in the unit of the predictand (e.g., mm, degC, ...)</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">isPercentile</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># choose a gridpoint within the predictand domain to plot the forecast and climatological</span>
+<span class="c1"># probability of exceedance and PDF curves. If set to None, the centroid of the predictand domain will be used.</span>
+<span class="n">point_latitude</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">point_longitude</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>Here we select the median and the point (1E, 7N) located over Togo, which is marked by a red cross on the map below.</p>
+<p>Consistent with the tercile-format forecast, the PoE the median is mostly positive.</p>
+<p>At our Togo gridpoint, the forecast PoE curve (red, left panel) is shifted upward and the PDF (red, right panel) is shifted to the right of the climatological curve (blue). The selected threshold value (here the median) at this gridpoint is shown by the black dashed vertical linne - here about 600 mm.</p>
+<a class="bg-primary reference internal image-reference" href="_images/flex50_rev.png"><img alt="fishy" class="bg-primary align-left" src="_images/flex50_rev.png" style="width: 800px;" /></a>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The empirical distributions of the climatology are shown in pale blue on the PoE and PDF plots. These represent the 35 observed annual values of Jun-Sep precipitation total at the togo gridpoint (1982–2016 period).
+(need these both in pale blue)</p>
+</div>
+<p>The final cells record information about the python environment that will be useful if we need to reproduce this configuration in the future.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!conda list
+!conda list --explicit
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="running.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Running PyCPT 2.5</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="references.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">References</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">The multimodel NextGen ensemble</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-mme-hindcast-skill">1. Plot MME Hindcast Skill</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-mme-forecast-maps">2. Plot the MME forecast maps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-mme-flexible-forecast">2. Plot MME Flexible forecast</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By IRI Climate Group
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -6,8 +6,9 @@ root: intro
 chapters:
 - file: nextgen
 - file: cpt 
-- file: workflow1
-- file: workflow2
+- file: installation
+- file: configuration
+- file: running
 - file: MME
 - file: references
 #- file: content

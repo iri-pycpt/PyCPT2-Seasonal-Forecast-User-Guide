@@ -1,0 +1,555 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Running PyCPT 2.5 &#8212; Guide to PyCPT 2 for Seasonal Climate Forecasts</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'running';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="The multimodel NextGen ensemble" href="MME.html" />
+    <link rel="prev" title="Configuring PyCPT 2.5" href="configuration.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/pycpt_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/pycpt_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="nextgen.html">The NextGen Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpt.html">The Climate Predictability Tool (CPT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installing PyCPT 2.5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuring PyCPT 2.5</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Running PyCPT 2.5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MME.html">The multimodel NextGen ensemble</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/running.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Running PyCPT 2.5</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-cpt-analysis-and-plot-the-skill-for-multiple-gcms">1. Run the CPT analysis and plot the skill for multiple GCMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-eofs-of-the-predictor-and-predictand-fields">2. Plot the EOFs of the predictor and predictand fields</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-cca-modes">3. Plot the CCA modes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-calibrated-forecasts-from-the-individual-models">4. Plot the calibrated forecasts from the individual models</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="running-pycpt-2-5">
+<h1>Running PyCPT 2.5<a class="headerlink" href="#running-pycpt-2-5" title="Permalink to this heading">#</a></h1>
+<section id="run-the-cpt-analysis-and-plot-the-skill-for-multiple-gcms">
+<h2>1. Run the CPT analysis and plot the skill for multiple GCMs<a class="headerlink" href="#run-the-cpt-analysis-and-plot-the-skill-for-multiple-gcms" title="Permalink to this heading">#</a></h2>
+<p>The next cells in the Jupyter Notebook will download the predictor and predictand datasets and then execute CPT for each GCM, here namely for the CFSv2 and SEAS5 models.  The next step is to plot and assess the cross-validated <strong>deterministic</strong> skill scores for each GCM. Note that these are deterministic skill scores because the regression model is deterministic, and our goal is <strong>selection</strong> of the most appropriate model.</p>
+<p>The available deterministic metrics are</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">skill_metrics</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pearson&#39;</span><span class="p">,</span> <span class="s1">&#39;spearman&#39;</span><span class="p">,</span> <span class="s1">&#39;two_alternative_forced_choice&#39;</span><span class="p">,</span> <span class="s1">&#39;roc_area_under_curve&#39;</span><span class="p">,</span> <span class="s1">&#39;roc_area_above_curve&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<a class="bg-primary reference internal image-reference" href="_images/skill_individual.png"><img alt="fishy" class="bg-primary align-left" src="_images/skill_individual.png" style="width: 800px;" /></a>
+<p>The <strong>Pearson and Spearman correlation maps</strong> show the degree of association between the cross-validated predictions of Jun-Sep precipitation over the hindcast period, and the CHIRPS data. Both coefficients should be positive over most of the map for the predictions to be meaningful. The SEAS5 meets this criterion while CFSv2 does not.</p>
+<p>The <strong>2AFC</strong> and <strong>ROC</strong> scores assess how well categorical deterministic hindcasts are able to discriminate between the observed tercile categories. The ROC areas need to exceed 0.5 to beat climatology, and the 2AFC to exceed 50%. The maps of these discrimination scores largely agree with the correlations, indicating that the CFSv2 has little skill. We recommend that you assess the skills of other available models, in order to build the best multi-model ensemble for a particular region.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">interactive</span> <span class="pre">=</span> <span class="pre">False</span></code> prior to performing the CPT analysis enables the CPT Goodness Index to be accessed when CPT runs, as well as other run-time messages issued by CPT.</p>
+</div>
+<div class="admonition-why-aren-t-probabilistic-skill-scores-plotted-in-pycpt-2-5 admonition">
+<p class="admonition-title">Why aren’t probabilistic skill scores plotted in PyCPT 2.5?</p>
+<p>CPT requires the so-called retroactive forecasting method to be used to calculate probabilistic skill scores. The the NMME and C3S hindcast datasets are too short for this to be viable. It is, however, implemented in the subseasonal version of PyCPT 2.5.</p>
+</div>
+</section>
+<section id="plot-the-eofs-of-the-predictor-and-predictand-fields">
+<h2>2. Plot the EOFs of the predictor and predictand fields<a class="headerlink" href="#plot-the-eofs-of-the-predictor-and-predictand-fields" title="Permalink to this heading">#</a></h2>
+<p>The CCA and PCR models constructed by CPT both use a Principal Component (PC)  analysis of the GCM predictor field to reduce its dimension to a few independent components. CCA also uses a PC analysis of the observed predictand field.</p>
+<p>The PC timeseries and EOF spatial loadings are plotted, with the predictor EOFs on the left and the predictand EOFs (only for CCA) on the right. The EOF maps show the spatial patterns that dominate (in variance) the seasonal variability (from year to year) in the observations and each GCM.  The patterns of the first three EOFs of the <code class="docutils literal notranslate"><span class="pre">SEAS5</span></code> model precipitation are quite similar to their <code class="docutils literal notranslate"><span class="pre">UCSB</span></code> observed counterparts, lending credence to the <code class="docutils literal notranslate"><span class="pre">SEAS5</span></code> model.</p>
+<p>The variance fractions explained by the EOF modes are given (in %) above each EOF map. Note that the variances of the the two leading modes of the <code class="docutils literal notranslate"><span class="pre">SEAS5</span></code> model are much larger than their observed counterparts. Several factors may account for this, including (a) the model’s ensemble mean is used (X), and (b) the observed CHIRPS field (Y) has high spatial resolution than the model, both of which will increase the signal to noise of the X compared to Y.</p>
+<a class="bg-primary reference internal image-reference" href="_images/EOFs_rev.png"><img alt="fishy" class="bg-primary align-left" src="_images/EOFs_rev.png" style="width: 800px;" /></a>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>The EOF patterns are geometrically constrained to be statistically independent, and to maximize varaince, both of which prevents an entirely physical interpretation. Thus, the first EOF is largely of one sign everywhere with the 2nd and 3rd modes representing north-south and east-west dipoles.</p>
+</div>
+</section>
+<section id="plot-the-cca-modes">
+<h2>3. Plot the CCA modes<a class="headerlink" href="#plot-the-cca-modes" title="Permalink to this heading">#</a></h2>
+<p>The CCA modes are easier to interpret physically, than the EOFs, because they are not geometrically constrained or maximize variance. Rather, they are defined by the linear combinations of the EOF timeseries that are maximally correlated. The figure below shows the two CCA modes of the SEAS5 and CHIRPS. CCA confirms that the patterns of unimodal variability and north-south rainfall-anomaly contrasts seen in EOFs 1 and 2 are indeed physical. These patterns are fairly closely matched between the hindcasts and observations, but their time variations are far from perfectly correlated (about 0.66 for mode 1 and 0.46 for mode 2); these imperfect correlations reflect the errors in the GCM hindcasts, but nonetheless indicate substantial seasonal rainfall predictability across the domain.</p>
+<a class="bg-primary reference internal image-reference" href="_images/CCAmodes_rev.png"><img alt="fishy" class="bg-primary align-left" src="_images/CCAmodes_rev.png" style="width: 800px;" /></a>
+<p>In summary, the maps and timeseries of the EOF and CCA modes help to visualize the CPT regression model, and provide important information for <strong>model selection.</strong> In the case of CCA,  physically-interpretable  co-variability between predictor and predictand fields is essential. For PCR, a physical interpretation of the predictor EOFs should also be attempted.</p>
+<!-- 
+```{admonition} Some math
+CCA diagonalizes the regression matrix by transforming the variables X & Y, such that the elements become cc coefficients
+Lin Alg: forecast = cc.<CCA_X_loadings>.<X_forexast>.<CCA_Y_loadings>
+Lin Alg: forecast(x,y) = cc * <CCA_X_loadings>.<X_forecast> * Y_CCA_loadings(x,y)
+Models with high cc coefficients and interpretable mappings are preferable
+```
+ -->
+<div class="admonition-some-math admonition">
+<p class="admonition-title">Some math</p>
+<p>CCA diagonalizes the regression matrix <span class="math notranslate nohighlight">\(\widetilde{\widetilde{A}}\)</span> by transforming the predictor and predictand vectors <span class="math notranslate nohighlight">\(\widetilde{Y} = \widetilde{\widetilde{A}} \widetilde{X}\)</span>, such that the leading diagonal elements of <span class="math notranslate nohighlight">\(\widetilde{\widetilde{A}}\)</span> become the canonical correlation coefficients <span class="math notranslate nohighlight">\(\rho(k)\)</span> where <span class="math notranslate nohighlight">\(k\)</span> denotes the mode number.</p>
+<p>The gridpoint forecast value of the predictand <span class="math notranslate nohighlight">\(Y^f(x,y)\)</span> is given by the inner product of the GCM prediction field <span class="math notranslate nohighlight">\(\widetilde{X}^f\)</span> with the X CCA modes <span class="math notranslate nohighlight">\(\widetilde{U}_k\)</span> , times the canonical correlation, times the local value of the Y CCA mode <span class="math notranslate nohighlight">\(V_k(x,y),\)</span>  summed over all the CCA modes that are retained by CPT:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-65e2ddf2-6c40-494f-9d14-6fb084532b25">
+<span class="eqno">(1)<a class="headerlink" href="#equation-65e2ddf2-6c40-494f-9d14-6fb084532b25" title="Permalink to this equation">#</a></span>\[\begin{equation}
+Y^f(x,y) = \sum_k \rho(k) \langle \widetilde{X}^f , \widetilde{U}_k \rangle V_k(x,y). 
+\end{equation}\]</div>
+<p>In other words, to get the forecast value at any point, we first project the GCM’s forecast field onto the X CCA mode, and then multiply this scalar value by both the canonical correlation value and by the local amplitude of the CCA Y mode. A strong projection and large canonical correlation coefficient, together with a large local amplitude of the CCA Y mode are <strong>all</strong> required for the local forecast anomaly to be large.  If any of these are small, the contribution of this CCA mode to the forecast will be small.</p>
+</div>
+<!-- 
+```{admonition} Some math
+CCA diagonalizes the regression matrix A by transforming the variables X & Y, such that the elements become cc coefficients
+Lin Alg: forecast = cc.<CCA_X_loadings>.<X_forexast>.<CCA_Y_loadings>
+Lin Alg: forecast(x,y) = cc * <CCA_X_loadings>.<X_forecast> * Y_CCA_loadings(x,y)
+Models with high cc coefficients and interpretable mappings are preferable
+```
+ -->
+<div class="admonition-how-many-eofs-and-cca-modes admonition">
+<p class="admonition-title">How many EOFs and CCA modes?</p>
+<p>CCA truncates the number of EOFs and CCA modes by cycling through all possible combinatioms of X, Y, and CCA truncations, calculating the cross-validated Goodness index (which measures the model validity averaged spatially across the predictand domain).</p>
+</div>
+<p><strong>Advantages of CCA</strong></p>
+<ul class="simple">
+<li><p>capitalizes on the larger spatial scales of seasonal climate predictability (which result from the oceans’ role in providing the main “sources” of prediction skill on seasonal time scales) by identifying “patterns” of predictable precipitation/temperature</p></li>
+<li><p>by identifying predictable spatial patterns in the observations, it is robust to local-scale observational error (noise)
+allows physical interoperation of the regression between GCM predictions and in-country climate variability</p></li>
+<li><p>produces forecasts that vary smoothly are are consistent from grid point to grid point</p></li>
+</ul>
+<p><strong>Advantages of PCR</strong></p>
+<ul class="simple">
+<li><p>Does not truncate the predictand, enabling more variance of the predictand to be potentially predicted</p></li>
+</ul>
+</section>
+<section id="plot-the-calibrated-forecasts-from-the-individual-models">
+<h2>4. Plot the calibrated forecasts from the individual models<a class="headerlink" href="#plot-the-calibrated-forecasts-from-the-individual-models" title="Permalink to this heading">#</a></h2>
+<p>The next cell of the Notebook, prior to the construction of the multi-model ensemble, allows the forecasts from the individual models to be plotted from the forecast initial date given by <code class="docutils literal notranslate"><span class="pre">fdate</span></code> — in both tercile probability and deterministic formats.</p>
+<p>These are plotted below for the <code class="docutils literal notranslate"><span class="pre">SEAS5</span></code> CCA-calibrated Jun-Sep 2022 precipitation, initialized on May 1, 2023. The top map shows the probability of the dominant tercile. The second map shows the deterministic forecast, expressed here as an anomaly;  this is controlled by the <code class="docutils literal notranslate"><span class="pre">tailoring</span></code> option in <code class="docutils literal notranslate"><span class="pre">cpt_args</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;tailoring&#39;</span><span class="p">:</span> <span class="s1">&#39;Anomaly&#39;</span><span class="p">,</span>  <span class="c1"># tailoring None, &#39;Anomaly&#39;</span>
+</pre></div>
+</div>
+<p>The precipitation anomaly is expressed in the units of the predictand (mm). The calibrated <code class="docutils literal notranslate"><span class="pre">SEAS5</span></code> forecast is toward wet in the north and dry in the south.</p>
+<a class="bg-primary reference internal image-reference" href="_images/forecasts_rev.png"><img alt="fishy" class="bg-primary align-left" src="_images/forecasts_rev.png" style="width: 800px;" /></a>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The climatological period in PyCPT 2 is always set to the length of the training period. In this csase 1982-2016.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To provide an uncalibrated forecast baseline, our calibrated forecasts can be compared with the global forecast anomaly maps of the NMME models, noting that these are for 3-month averages: https://www.cpc.ncep.noaa.gov/products/NMME/archive/</p>
+<p>Similar maps are available for the C3S suite of models can be found here: https://climate.copernicus.eu/charts/c3s_seasonal/</p>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="configuration.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Configuring PyCPT 2.5</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="MME.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">The multimodel NextGen ensemble</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-cpt-analysis-and-plot-the-skill-for-multiple-gcms">1. Run the CPT analysis and plot the skill for multiple GCMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-eofs-of-the-predictor-and-predictand-fields">2. Plot the EOFs of the predictor and predictand fields</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-cca-modes">3. Plot the CCA modes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-calibrated-forecasts-from-the-individual-models">4. Plot the calibrated forecasts from the individual models</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By IRI Climate Group
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
