@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>The multimodel NextGen ensemble &#8212; Guide to PyCPT 2 for Seasonal Climate Forecasts</title>
+    <title>The multimodel NextGen ensemble &#8212; Guide to PyCPT 2.5 for Seasonal Climate Forecasts</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="References" href="references.html" />
-    <link rel="prev" title="Running PyCPT 2" href="workflow2.html" />
+    <link rel="prev" title="Running PyCPT 2.5" href="running.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -97,7 +97,7 @@ const thebe_selector_output = ".output, .cell_output"
       <img src="_static/pycpt_logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Guide to PyCPT 2 for Seasonal Climate Forecasts</h1>
+      <h1 class="site-logo" id="site-title">Guide to PyCPT 2.5 for Seasonal Climate Forecasts</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -125,13 +125,18 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="workflow1.html">
-   Installing and configuring
+  <a class="reference internal" href="installation.html">
+   Installing PyCPT 2.5
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="workflow2.html">
-   Running PyCPT 2
+  <a class="reference internal" href="configuration.html">
+   Configuring PyCPT 2.5
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="running.html">
+   Running PyCPT 2.5
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -366,7 +371,7 @@ title="Print to PDF"
 <p>First we need to select a subset of GCMs to include in the MME. Factors to consider are:</p>
 <ul class="simple">
 <li><p>deterministic skill maps for the individual models: All skill scores should be generally positive across the map</p></li>
-<li><p>their CCA/EOF modes: The CCA modes of each model should be physically interpretable and the CC coefficient should generally exceed about 0.4</p></li>
+<li><p>their CCA/EOF modes: The CCA modes of each model should be physically interpretable and the CC coefficient should generally be about 0.4 or more.</p></li>
 <li><p>the forecast maps: Any differences in polarity between models should be confirmed by looking at the global maps from the NMME and C3S websites.</p></li>
 </ul>
 <p>Although the CFSv2 model skill is low in our West African example, we will still include it in our two-model MME for demonstration purposes.</p>
@@ -396,7 +401,7 @@ title="Print to PDF"
 <section id="plot-the-mme-forecast-maps">
 <h2>2. Plot the MME forecast maps<a class="headerlink" href="#plot-the-mme-forecast-maps" title="Permalink to this headline">#</a></h2>
 <p>The MME forecast is shown below in both tercile probabilities and anomaly (deterministic) format. The above-normal category dominates the forecasts almost everywhere, and the seasonal rainfall anomaly is correspondingly largely positive.</p>
-<a class="bg-primary reference internal image-reference" href="_images/MME_forecast.png"><img alt="fishy" class="bg-primary align-left" src="_images/MME_forecast.png" style="width: 400px;" /></a>
+<a class="bg-primary reference internal image-reference" href="_images/MME_forecast_rev.png"><img alt="fishy" class="bg-primary align-left" src="_images/MME_forecast_rev.png" style="width: 600px;" /></a>
 <div class="admonition-interpretation admonition">
 <p class="admonition-title">Interpretation</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">CFSv2</span></code> and <code class="docutils literal notranslate"><span class="pre">SEAS5</span></code> calibrated precipitation forecasts over W Africa have different structures: anomalously wet across the whole region vs wetter in the north and dryer in the south respectively. The MME of the two models together is dominated by the  <code class="docutils literal notranslate"><span class="pre">CFSv2</span></code>. This highlights the limitation of our 2 model MME. <strong>The use of at least 3-4 models is recommended.</strong></p>
@@ -411,7 +416,7 @@ title="Print to PDF"
 <span class="n">isPercentile</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="c1"># choose a gridpoint within the predictand domain to plot the forecast and climatological</span>
-<span class="c1"># probability of exceedance and PDF curves </span>
+<span class="c1"># probability of exceedance and PDF curves. If set to None, the centroid of the predictand domain will be used.</span>
 <span class="n">point_latitude</span> <span class="o">=</span> <span class="mi">7</span>
 <span class="n">point_longitude</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
@@ -419,11 +424,16 @@ title="Print to PDF"
 <p>Here we select the median and the point (1E, 7N) located over Togo, which is marked by a red cross on the map below.</p>
 <p>Consistent with the tercile-format forecast, the PoE the median is mostly positive.</p>
 <p>At our Togo gridpoint, the forecast PoE curve (red, left panel) is shifted upward and the PDF (red, right panel) is shifted to the right of the climatological curve (blue). The selected threshold value (here the median) at this gridpoint is shown by the black dashed vertical linne - here about 600 mm.</p>
-<a class="bg-primary reference internal image-reference" href="_images/flex50.png"><img alt="fishy" class="bg-primary align-left" src="_images/flex50.png" style="width: 800px;" /></a>
+<a class="bg-primary reference internal image-reference" href="_images/flex50_rev.png"><img alt="fishy" class="bg-primary align-left" src="_images/flex50_rev.png" style="width: 800px;" /></a>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The empirical distributions of the climatology are shown in pale blue on the PoE and PDF plots. These represent the 35 observed annual values of Jun-Sep precipitation total at the togo gridpoint (1982–2016 period).
 (need these both in pale blue)</p>
+</div>
+<p>The final cells record information about the python environment that will be useful if we need to reproduce this configuration in the future.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!conda list
+!conda list --explicit
+</pre></div>
 </div>
 </section>
 </section>
@@ -455,11 +465,11 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="workflow2.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="running.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Running PyCPT 2</p>
+            <p class="prev-next-title">Running PyCPT 2.5</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="references.html" title="next page">

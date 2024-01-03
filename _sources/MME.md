@@ -2,7 +2,7 @@
 
 First we need to select a subset of GCMs to include in the MME. Factors to consider are:
 - deterministic skill maps for the individual models: All skill scores should be generally positive across the map
-- their CCA/EOF modes: The CCA modes of each model should be physically interpretable and the CC coefficient should generally exceed about 0.4
+- their CCA/EOF modes: The CCA modes of each model should be physically interpretable and the CC coefficient should generally be about 0.4 or more.
 - the forecast maps: Any differences in polarity between models should be confirmed by looking at the global maps from the NMME and C3S websites.  
 
 Although the CFSv2 model skill is low in our West African example, we will still include it in our two-model MME for demonstration purposes.
@@ -44,10 +44,10 @@ The MME RPSS is positive everywhere--exceeding climatological skill--confirming 
 
 The MME forecast is shown below in both tercile probabilities and anomaly (deterministic) format. The above-normal category dominates the forecasts almost everywhere, and the seasonal rainfall anomaly is correspondingly largely positive.
     
-```{image} img/MME_forecast.png
+```{image} img/MME_forecast_rev.png
 :alt: fishy
 :class: bg-primary
-:width: 400px
+:width: 600px
 :align: left
 ```
 
@@ -67,7 +67,7 @@ threshold = 0.5
 isPercentile = True
 
 # choose a gridpoint within the predictand domain to plot the forecast and climatological
-# probability of exceedance and PDF curves 
+# probability of exceedance and PDF curves. If set to None, the centroid of the predictand domain will be used.
 point_latitude = 7
 point_longitude = 1
 ```
@@ -78,7 +78,7 @@ Consistent with the tercile-format forecast, the PoE the median is mostly positi
 
 At our Togo gridpoint, the forecast PoE curve (red, left panel) is shifted upward and the PDF (red, right panel) is shifted to the right of the climatological curve (blue). The selected threshold value (here the median) at this gridpoint is shown by the black dashed vertical linne - here about 600 mm. 
 
-```{image} img/flex50.png
+```{image} img/flex50_rev.png
 :alt: fishy
 :class: bg-primary
 :width: 800px
@@ -88,4 +88,11 @@ At our Togo gridpoint, the forecast PoE curve (red, left panel) is shifted upwar
 ```{note} 
 The empirical distributions of the climatology are shown in pale blue on the PoE and PDF plots. These represent the 35 observed annual values of Jun-Sep precipitation total at the togo gridpoint (1982--2016 period). 
 (need these both in pale blue)
+```
+
+The final cells record information about the python environment that will be useful if we need to reproduce this configuration in the future.
+
+```python
+!conda list
+!conda list --explicit
 ```
